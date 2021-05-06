@@ -31,9 +31,45 @@ header-includes:
 - \pagestyle{fancy}
 ---
 
-\clearpage
+\clearpage 
 
 # Section 1
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(dslabs)
+library(kableExtra)
+library(bookdown)
+library(knitr)
+library(lubridate)
+data <- read.csv("DATA/Data_Tables_Criminal_Incidents_Visualisation_Year_Ending_December_2019.csv")
+dim(data)
+head(data)
+
+unique(data$Offence.Subdivision)
+
+```
+```{r bribery}
+Bribery <- data %>% 
+  filter(Offence.Subdivision == "B60 Bribery") %>% 
+select (c("Year","Year.ending","Offence.Subdivision","Incidents.Recorded")) %>% 
+  arrange(Year)
+
+Bribery
+
+
+
+```
+
+```{r plot}
+plot1 <- ggplot(data = Bribery,
+                aes(x = Year,
+                          y= Incidents.Recorded)) +
+                     geom_line()
+plot1 
+```
+
 
 
 \clearpage
